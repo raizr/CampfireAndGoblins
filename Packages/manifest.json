@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "com.unity.feature.mobile": "1.0.0",
+    "com.unity.device-simulator": "file:C:/DATA/UnityProjects/com.unity.device-simulator-3.0.3-preview",
     "com.unity.ide.visualstudio": "2.0.16",
     "com.unity.textmeshpro": "3.0.6",
     "com.unity.timeline": "1.6.4",

@@ -18,7 +18,8 @@ public class ScoreCounter : MonoBehaviour
 	}
 
 	private void OnTick() {
-		text.text =  clickerManager.State.CurrencyCurrentTotals.Select((kvp) => $"{kvp.Value}").ToArray()[0];
+		var totals = clickerManager.State.CurrencyHistoricalTotals.Select((kvp) => $"{kvp.Value}").ToArray();
+		text.text =  totals.Length > 0 ? totals[0] : "0";
 	}
 
 	// Update is called once per frame

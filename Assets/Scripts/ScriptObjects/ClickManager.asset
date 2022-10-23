@@ -13,26 +13,42 @@ MonoBehaviour:
   m_Name: ClickManager
   m_EditorClassIdentifier: 
   GUIDContainer:
-    _serializedGuid: 
+    _serializedGuid: 9335582b-ae0f-46b2-80c9-697903928027
   SaveSettings:
-    SaveType: 0
+    SaveType: 1
     SaveName: save
     SavePath: 
   Config:
-    Currencies: []
-    Clickables: []
-    AvailableBuildings: []
-    AvailableUpgrades: []
-    AvailableBossStages: []
-    BuildingCostIncrease: 0.15
+    Currencies:
+    - {fileID: 11400000, guid: 78b49354948857048a7c3925588cf72d, type: 2}
+    Clickables:
+    - {fileID: 11400000, guid: 4483058f60e2c864685505c7f7d46941, type: 2}
+    AvailableBuildings:
+    - {fileID: 11400000, guid: cf7dca0d8a3044c479ba51edcd0ddd66, type: 2}
+    AvailableUpgrades:
+    - {fileID: 11400000, guid: 9cb5998a44f76b94e93726f435446a56, type: 2}
+    AvailableBossStages:
+    - {fileID: 11400000, guid: 5804024fe21d6dd4386f3afa80732dea, type: 2}
+    - {fileID: 11400000, guid: 318ff3e640451b34d8feac29d4d7bd69, type: 2}
+    BuildingCostIncrease: 0
   State:
-    _earnedBuildings: []
-    _earnedBuildingsCount: 
+    _earnedBuildings:
+    - _serializedGuid: b5da57c8-c867-4dea-8d87-6c5a3b8af36d
+    _earnedBuildingsCount: 06000000
     _earnedUpgrades: []
-    _currencies: []
-    _currencyCurrentTotals: []
-    _currencyHistoricalTotals: []
+    _currencies:
+    - _serializedGuid: 7e7f490e-ce29-474c-b81c-8490d84d41be
+    _currencyCurrentTotals:
+    - 61
+    _currencyHistoricalTotals:
+    - 121
+    _earnedBossStages: []
+    currentBossCurrency: 0
+    currentLevel: 0
   OnTick:
+    m_PersistentCalls:
+      m_Calls: []
+  OnLevelChanged:
     m_PersistentCalls:
       m_Calls: []
   OnBuyUpgrade:
@@ -41,3 +57,17 @@ MonoBehaviour:
   OnBuyBuilding:
     m_PersistentCalls:
       m_Calls: []
+  OnBossStageStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnBossStageTimeChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  OnBossWin:
+    m_PersistentCalls:
+      m_Calls: []
+  OnBossLose:
+    m_PersistentCalls:
+      m_Calls: []
+  currentBossSeconds: 0
+  isBossStage: 0

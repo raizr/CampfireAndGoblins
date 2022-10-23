@@ -13,17 +13,17 @@ MonoBehaviour:
   m_Name: FirstBoss
   m_EditorClassIdentifier: 
   GUIDContainer:
-    _serializedGuid: 
+    _serializedGuid: ac428499-0198-4f48-95b5-310060132120
   Unlocked: 0
   RequirementGroups: []
-  ItemName: 
+  ItemName: First boss
   Description: 
   CostToStart:
-    Currency: {fileID: 0}
-    Amount: 0
+    Currency: {fileID: 11400000, guid: 78b49354948857048a7c3925588cf72d, type: 2}
+    Amount: 100
     Seconds: 0
   CostToEnd:
-    Currency: {fileID: 0}
-    Amount: 0
+    Currency: {fileID: 11400000, guid: 78b49354948857048a7c3925588cf72d, type: 2}
+    Amount: 100
     Seconds: 0
-  StageTime: 0
+  StageTime: 30

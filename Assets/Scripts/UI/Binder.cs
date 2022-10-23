@@ -5,11 +5,11 @@ using UnityEngine.UI;
 
 public class Binder : MonoBehaviour
 {
-    [SerializeField] private ClickerManager _clickerManager;
+    [SerializeField] private ClickerManager clickerManager;
 
     public TextMeshProUGUI Name;
-    public TextMeshProUGUI Cost;
-    public TextMeshProUGUI Description;
+    //public TextMeshProUGUI Cost;
+    public TextMeshProUGUI Count;
     private UnlockableComponent ClickerComponent;
     private Button Button;
 
@@ -17,13 +17,22 @@ public class Binder : MonoBehaviour
     {
         if (ClickerComponent is Upgrade)
         {
-            _clickerManager.BuyUpgrade(ClickerComponent as Upgrade);
+			clickerManager.BuyUpgrade(ClickerComponent as Upgrade);
         }
-        else
-        {
-            _clickerManager.BuyBuilding(ClickerComponent as Building);
-        }
+        else {
+			clickerManager.BuyBuilding(ClickerComponent as Building);
+			UpdateCount();
+		}
     }
+
+	public void UpdateCount() {
+		var building = ClickerComponent as Building;
+		int buildingCount = 0;
+		if (building != null) {
+			clickerManager.State.EarnedBuildings.TryGetValue(building, out buildingCount);
+		}
+		Count.text = buildingCount.ToString();
+	}
 
     public void Bind(Upgrade availableUpgrade)
     {
@@ -33,9 +42,12 @@ public class Binder : MonoBehaviour
         //this.Description.text = GenerateUpgradeString(availableUpgrade.UpgradePerk);
         Button = this.GetComponent<Button>();
 		Button.onClick.AddListener(Buy);
-        _clickerManager.OnTick.AddListener(IsActive);
+		clickerManager.OnTick.AddListener(IsActive);
+		clickerManager.OnBossWin.AddListener(IsActive);
+		clickerManager.OnBossLose.AddListener(IsActive);
         IsActive();
-    }
+		UpdateCount();
+	}
 
     public void Bind(Building availableBuilding)
     {
@@ -46,13 +58,16 @@ public class Binder : MonoBehaviour
             availableBuilding.YieldAmount.Currency.name);*/
         Button = this.GetComponent<Button>();
 		Button.onClick.AddListener(Buy);
-        _clickerManager.OnTick.AddListener(IsActive);
+		clickerManager.OnTick.AddListener(IsActive);
+		clickerManager.OnBossWin.AddListener(IsActive);
+		clickerManager.OnBossLose.AddListener(IsActive);
         IsActive();
+		UpdateCount();
     }
 
     private void IsActive()
     {
-        Button.interactable = _clickerManager.CanBuy(ClickerComponent);
+        Button.interactable = !clickerManager.isBossStage && clickerManager.CanBuy(ClickerComponent);
     }
 
     private string GenerateUpgradeString(UpgradePerk[] availableUpgradeUpgradePerk)

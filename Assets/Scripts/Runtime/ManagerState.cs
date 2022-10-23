@@ -23,7 +23,7 @@ namespace uClicker
 		[NonSerialized] public List<BossStage> EarnedBossStages = new List<BossStage>();
 		//[SerializeField] private GUIDContainer _currentBossStage = new GUIDContainer();
 		[SerializeField] private List<GUIDContainer> _earnedBossStages = new List<GUIDContainer>();
-
+		[SerializeField] public float currentBossCurrency = 0;
 		[SerializeField] public Int64 currentLevel = 0;
 
         public void OnBeforeSerialize()

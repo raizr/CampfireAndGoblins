@@ -1,0 +1,20 @@
+
+fire.png
+size: 132,264
+format: RGBA4444
+filter: Linear,Linear
+repeat: none
+Ellipse 42
+  rotate: false
+  xy: 2, 132
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+Ellipse_43_1
+  rotate: false
+  xy: 2, 2
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1

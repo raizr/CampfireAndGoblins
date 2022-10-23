@@ -13,16 +13,16 @@ MonoBehaviour:
   m_Name: Goblin
   m_EditorClassIdentifier: 
   GUIDContainer:
-    _serializedGuid: 
-  Unlocked: 0
+    _serializedGuid: b5da57c8-c867-4dea-8d87-6c5a3b8af36d
+  Unlocked: 1
   RequirementGroups: []
-  ItemName: 
+  ItemName: Goblin
   Description: 
   Cost:
-    Currency: {fileID: 0}
-    Amount: 0
+    Currency: {fileID: 11400000, guid: 78b49354948857048a7c3925588cf72d, type: 2}
+    Amount: 10
     Seconds: 0
   YieldAmount:
-    Currency: {fileID: 0}
-    Amount: 0
-    Seconds: 0
+    Currency: {fileID: 11400000, guid: 78b49354948857048a7c3925588cf72d, type: 2}
+    Amount: 1
+    Seconds: 10

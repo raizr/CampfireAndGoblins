@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -28,14 +29,11 @@ namespace uClicker
         public UnityEvent OnBossLose = new UnityEvent();
 		private UInt64 currentSeconds = 0;
 		public UInt64 currentBossSeconds = 0;
-
+		public bool isBossStage = false;
         #region Unity Events
 
 #if UNITY_EDITOR
-        /// <summary>
-        /// Validates platform settings and switches to platform compatible settings automatically
-        /// </summary>
-        private void OnValidate()
+		private void OnValidate()
         {
             if (UnityEditor.EditorUserBuildSettings.activeBuildTarget == UnityEditor.BuildTarget.WebGL &&
                 SaveSettings.SaveType == ManagerSaveSettings.SaveTypeEnum.SaveToFile)
@@ -46,9 +44,6 @@ namespace uClicker
         }
 #endif
 
-        /// <summary>
-        /// Inits Currency totals for manager on startup
-        /// </summary>
         public void OnEnable()
         {
             foreach (var configClickable in Config.Currencies)
@@ -60,9 +55,6 @@ namespace uClicker
             OnTick.Invoke();
 		}
 
-        /// <summary>
-        /// Clear save on unload so we don't try deserializing the save between play/stop
-        /// </summary>
         private void OnDisable()
         {
             State = new ManagerState();
@@ -243,16 +235,15 @@ namespace uClicker
                 case ManagerSaveSettings.SaveTypeEnum.SaveToPlayerPrefs:
                     if (!PlayerPrefs.HasKey(SaveSettings.SaveName))
                     {
-                        throw new ArgumentException($"Save '{SaveSettings.SaveName}' is null");
+						return;
                     }
 
                     json = PlayerPrefs.GetString(SaveSettings.SaveName);
                     break;
                 case ManagerSaveSettings.SaveTypeEnum.SaveToFile:
-                    if (!File.Exists(SaveSettings.FullSavePath))
-                    {
-                        throw new ArgumentException($"Save '{SaveSettings.FullSavePath}' is null");
-                    }
+                    if (!File.Exists(SaveSettings.FullSavePath)) {
+						return;
+					}
 
 #if DEBUG
                     Debug.LogFormat("Loading Save from file: {0}", SaveSettings.FullSavePath);
@@ -311,10 +302,15 @@ namespace uClicker
 
         private bool UpdateTotal(Currency currency, float amount)
         {
-            float total;
-            State.CurrencyCurrentTotals.TryGetValue(currency, out total);
-            total += amount;
-            State.CurrencyCurrentTotals[currency] = total;
+			if (isBossStage) {
+				State.currentBossCurrency += amount;
+			}
+			else {
+	            float total;
+	            State.CurrencyCurrentTotals.TryGetValue(currency, out total);
+	            total += amount;
+	            State.CurrencyCurrentTotals[currency] = total;
+			}
 
             if (amount > 0)
             {
@@ -325,6 +321,13 @@ namespace uClicker
 
             return amount != 0;
         }
+
+		private void UpdateBossCurrency() {
+			if (!isBossStage) {
+				return;
+			}
+			State.currentBossCurrency++;
+		}
 
         private float PerSecondAmount(Currency currency)
         {
@@ -355,18 +358,21 @@ namespace uClicker
 			if (State.currentBossStage) {
 				return;
 			}
-			foreach (BossStage availableBossStage in Config.AvailableBossStages)
-			{
-				availableBossStage.Unlocked = CanBuy(availableBossStage);
-				if (availableBossStage.Unlocked) {
-					State.currentBossStage = availableBossStage;
-					currentBossSeconds = State.currentBossStage.StageTime;
-					var cost = State.currentBossStage.CostToStart;
-					Deduct(cost.Currency, cost.Amount);
-                    OnBossStageStart.Invoke();
-					break;
-				}
+			var availableBossStage = GetNextBoss();
+			availableBossStage.Unlocked = CanBuy(availableBossStage);
+			if (availableBossStage.Unlocked) {
+				State.currentBossStage = availableBossStage;
+				currentBossSeconds = State.currentBossStage.StageTime;
+				State.currentBossCurrency = 0;
+				isBossStage = true;
+				OnBossStageStart.Invoke();
 			}
+
+		}
+
+		public BossStage GetNextBoss() {
+			var index = Math.Min(State.currentLevel, Config.AvailableBossStages.Length - 1);
+			return Config.AvailableBossStages[index];
 		}
 
         private bool BuildingAvailable(Building building)
@@ -382,11 +388,6 @@ namespace uClicker
 
             return unlocked;
         }
-
-		private bool BossAvailable(BossStage stage)
-		{
-			return IsUnlocked(stage.RequirementGroups);
-		}
 
         private bool IsUnlocked(RequirementGroup[] requirementGroups)
         {
@@ -530,8 +531,7 @@ namespace uClicker
 
 		private void ApplyBossStage()
 		{
-			if (!State.currentBossStage)
-			{
+			if (!isBossStage) {
 				return;
 			}
 
@@ -541,31 +541,39 @@ namespace uClicker
 		}
 
 		private void CheckBossStageEnd() {
-			if (!State.currentBossStage)
+			if (!isBossStage)
 			{
 				return;
 			}
-			float amount;
-			State.CurrencyCurrentTotals.TryGetValue(State.currentBossStage.CostToEnd.Currency, out amount);
-
-			if (amount > State.currentBossStage.CostToEnd.Amount
+			if (State.currentBossCurrency > State.currentBossStage.CostToEnd.Amount
 				&& currentBossSeconds > 0) {
-				CompleteCurrentBossStage(amount);
 				LevelUp();
+				isBossStage = false;
+				CompleteCurrentBossStage();
 				OnBossWin.Invoke();
 				Debug.Log("Win");
 				return;
 			}
 
 			if (currentBossSeconds <= 0) {
-				CompleteCurrentBossStage(amount);
+				State.currentBossStage.Unlocked = false;
+				isBossStage = false;
 				OnBossLose.Invoke();
 				Debug.Log("Lose");
 			}
 		}
 
-		private void CompleteCurrentBossStage(float amount) {
-			Deduct(State.currentBossStage.CostToStart.Currency, amount);
+		public void CallCurrentBossAgain() {
+			currentBossSeconds = State.currentBossStage.StageTime;
+			isBossStage = true;
+			OnBossStageStart.Invoke();
+		}
+
+		private void CompleteCurrentBossStage() {
+			var currency = State.currentBossStage.CostToStart.Currency;
+			float amount = State.currentBossCurrency;
+			State.CurrencyCurrentTotals.TryGetValue(currency, out amount);
+			Deduct(currency, amount);
 			State.currentBossStage.Unlocked = false;
 			State.currentBossStage = null;
 		}

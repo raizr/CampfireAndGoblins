@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: Totem
   m_EditorClassIdentifier: 
   GUIDContainer:
-    _serializedGuid: 
-  Unlocked: 0
+    _serializedGuid: 2f441fe3-bbc4-4a8c-84f9-9c62e8d54b3b
+  Unlocked: 1
   RequirementGroups: []
-  ItemName: 
+  ItemName: Totem
   Description: 
   Cost:
-    Currency: {fileID: 0}
-    Amount: 0
+    Currency: {fileID: 11400000, guid: 78b49354948857048a7c3925588cf72d, type: 2}
+    Amount: 15
     Seconds: 0
   UpgradePerk: []

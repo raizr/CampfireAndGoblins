@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Clicker
   m_EditorClassIdentifier: 
   GUIDContainer:
-    _serializedGuid: 
-  Currency: {fileID: 0}
-  Amount: 0
+    _serializedGuid: 03053593-6aad-436e-a5c7-756ca5e59017
+  Currency: {fileID: 11400000, guid: 78b49354948857048a7c3925588cf72d, type: 2}
+  Amount: 1
