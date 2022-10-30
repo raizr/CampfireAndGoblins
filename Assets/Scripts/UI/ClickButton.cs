@@ -10,7 +10,8 @@ public class ClickButton : MonoBehaviour
     public ClickerManager clickerManager;
 	public Button button;
 	public Clickable clickable;
-
+	public int maxCounter = 5;
+	private int clickCounter = 0;
 	private IEnumerator gameLoop;
     // Start is called before the first frame update
     void Start() {
@@ -19,9 +20,17 @@ public class ClickButton : MonoBehaviour
 		gameLoop = StartGame();
 		StartCoroutine(gameLoop);
 		clickerManager.OnEnable();
+		clickCounter = 0;
 	}
 
 	void OnClick() {
+		clickCounter++;
+		if (clickCounter > maxCounter) {
+			clickCounter = maxCounter;
+		}
+		if (clickCounter > 0) {
+			clickerManager.OnComboClick.Invoke(clickCounter);
+		}
 		clickerManager.Click(clickable);
 	}
 
@@ -31,6 +40,8 @@ public class ClickButton : MonoBehaviour
 		while (Application.isPlaying)
 		{
 			yield return new WaitForSecondsRealtime(1);
+			clickCounter = 0;
+			clickerManager.OnComboClick.Invoke(clickCounter);
 			clickerManager.Tick();
 			clickerManager.SaveProgress();
 			PlayerPrefs.Save();

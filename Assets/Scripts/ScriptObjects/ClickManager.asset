@@ -32,18 +32,14 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 318ff3e640451b34d8feac29d4d7bd69, type: 2}
     BuildingCostIncrease: 0
   State:
-    _earnedBuildings:
-    - _serializedGuid: b5da57c8-c867-4dea-8d87-6c5a3b8af36d
-    _earnedBuildingsCount: 06000000
+    _earnedBuildings: []
+    _earnedBuildingsCount: 
     _earnedUpgrades: []
-    _currencies:
-    - _serializedGuid: 7e7f490e-ce29-474c-b81c-8490d84d41be
-    _currencyCurrentTotals:
-    - 61
-    _currencyHistoricalTotals:
-    - 121
+    _currencies: []
+    _currencyCurrentTotals: []
+    _currencyHistoricalTotals: []
     _earnedBossStages: []
-    currentBossCurrency: 0
+    currentBossCurrency: 1
     currentLevel: 0
   OnTick:
     m_PersistentCalls:

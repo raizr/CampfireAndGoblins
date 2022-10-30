@@ -18,6 +18,6 @@ public class CurrentLevel : MonoBehaviour
     
     void OnLevelChanged()
     {
-		text.text = "Level: " + clickerManager.State.currentLevel;
+		text.text = (clickerManager.State.currentLevel + 1).ToString();
     }
 }

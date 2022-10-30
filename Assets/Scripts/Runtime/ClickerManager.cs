@@ -27,11 +27,13 @@ namespace uClicker
 		public UnityEvent OnBossStageTimeChanged = new UnityEvent();
         public UnityEvent OnBossWin = new UnityEvent();
         public UnityEvent OnBossLose = new UnityEvent();
+		public UnityEvent<int> OnComboClick = new UnityEvent<int>();
 		private UInt64 currentSeconds = 0;
 		public UInt64 currentBossSeconds = 0;
 		public bool isBossStage = false;
-        #region Unity Events
 
+
+        #region Unity Events
 #if UNITY_EDITOR
 		private void OnValidate()
         {
