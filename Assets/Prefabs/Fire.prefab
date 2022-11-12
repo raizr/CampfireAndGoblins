@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1860048356087687301}
   - component: {fileID: 1860048356087687300}
   - component: {fileID: 1860048356087687303}
+  - component: {fileID: 7451612215017931190}
   m_Layer: 0
   m_Name: Fire
   m_TagString: Untagged
@@ -119,3 +120,15 @@ MonoBehaviour:
   _animationName: lvl0
   loop: 1
   timeScale: 1
+--- !u!114 &7451612215017931190
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1860048356087687302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56fdbbf6dda8f4d4db88d367ecdf8340, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -18,6 +18,7 @@ namespace uClicker
         public ManagerSaveSettings SaveSettings = new ManagerSaveSettings();
         public ManagerConfig Config = new ManagerConfig();
         public ManagerState State = new ManagerState();
+		public int maxCounter = 5;
 
         public UnityEvent OnTick = new UnityEvent();
         public UnityEvent OnLevelChanged = new UnityEvent();
@@ -27,11 +28,12 @@ namespace uClicker
 		public UnityEvent OnBossStageTimeChanged = new UnityEvent();
         public UnityEvent OnBossWin = new UnityEvent();
         public UnityEvent OnBossLose = new UnityEvent();
-		public UnityEvent<int> OnComboClick = new UnityEvent<int>();
+        public UnityEvent OnClick = new UnityEvent();
+		public UnityEvent<float> OnComboClick = new UnityEvent<float>();
+		[NonSerialized]  public UInt64 currentBossSeconds = 0;
+		[NonSerialized] public bool isBossStage = false;
 		private UInt64 currentSeconds = 0;
-		public UInt64 currentBossSeconds = 0;
-		public bool isBossStage = false;
-
+		private int clickCounter = 0;
 
         #region Unity Events
 #if UNITY_EDITOR
@@ -52,7 +54,8 @@ namespace uClicker
             {
                 UpdateTotal(configClickable, 0);
             }
-
+            
+			clickCounter = 1;
 			OnLevelChanged.Invoke();
             OnTick.Invoke();
 		}
@@ -72,7 +75,12 @@ namespace uClicker
 
         public void Click(Clickable clickable)
         {
-            float amount = clickable.Amount;
+			OnClick.Invoke();
+			clickCounter++;
+			if (clickCounter > maxCounter) {
+				clickCounter = maxCounter;
+			}
+            float amount = clickable.Amount * clickCounter;
             Currency currency = clickable.Currency;
 
             ApplyClickPerks(clickable, ref amount);
@@ -92,6 +100,7 @@ namespace uClicker
         {
             bool updated = false;
 			currentSeconds++;
+			clickCounter = 0;
 			CheckBossStage();
 			ApplyBossStage();
             foreach (Currency currency in Config.Currencies)
@@ -319,8 +328,8 @@ namespace uClicker
                 float historicalTotal;
                 State.CurrencyHistoricalTotals.TryGetValue(currency, out historicalTotal);
                 State.CurrencyHistoricalTotals[currency] = historicalTotal + amount;
+				OnComboClick.Invoke(amount);
             }
-
             return amount != 0;
         }
 

@@ -1,0 +1,209 @@
+
+goblin.png
+size: 812,172
+format: RGBA4444
+filter: Linear,Linear
+repeat: none
+Ellipse 42
+  rotate: false
+  xy: 162, 40
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+a
+  rotate: false
+  xy: 257, 3
+  size: 30, 35
+  orig: 30, 35
+  offset: 0, 0
+  index: -1
+body
+  rotate: false
+  xy: 292, 57
+  size: 107, 111
+  orig: 107, 111
+  offset: 0, 0
+  index: -1
+brov1
+  rotate: false
+  xy: 477, 5
+  size: 35, 18
+  orig: 35, 18
+  offset: 0, 0
+  index: -1
+brov2
+  rotate: false
+  xy: 477, 5
+  size: 35, 18
+  orig: 35, 18
+  offset: 0, 0
+  index: -1
+ez_1
+  rotate: false
+  xy: 783, 75
+  size: 22, 23
+  orig: 22, 23
+  offset: 0, 0
+  index: -1
+ez_2
+  rotate: false
+  xy: 783, 75
+  size: 22, 23
+  orig: 22, 23
+  offset: 0, 0
+  index: -1
+front_arm1_1
+  rotate: true
+  xy: 654, 74
+  size: 73, 66
+  orig: 73, 66
+  offset: 0, 0
+  index: -1
+front_arm1_2
+  rotate: false
+  xy: 748, 143
+  size: 31, 25
+  orig: 31, 25
+  offset: 0, 0
+  index: -1
+front_arm1_3
+  rotate: false
+  xy: 748, 43
+  size: 33, 48
+  orig: 33, 48
+  offset: 0, 0
+  index: -1
+front_ear
+  rotate: 180
+  xy: 435, 25
+  size: 103, 111
+  orig: 103, 111
+  offset: 0, 0
+  index: -1
+front_leg_1_2
+  rotate: false
+  xy: 722, 48
+  size: 24, 93
+  orig: 24, 93
+  offset: 0, 0
+  index: -1
+head
+  rotate: false
+  xy: 2, 17
+  size: 158, 151
+  orig: 158, 151
+  offset: 0, 0
+  index: -1
+month_2
+  rotate: true
+  xy: 600, 73
+  size: 75, 52
+  orig: 75, 52
+  offset: 0, 0
+  index: -1
+month_3
+  rotate: false
+  xy: 292, 10
+  size: 93, 45
+  orig: 93, 45
+  offset: 0, 0
+  index: -1
+month_smile
+  rotate: false
+  xy: 540, 6
+  size: 77, 65
+  orig: 77, 65
+  offset: 0, 0
+  index: -1
+nose
+  rotate: true
+  xy: 540, 73
+  size: 95, 58
+  orig: 95, 58
+  offset: 0, 0
+  index: -1
+rear_arm_1
+  rotate: true
+  xy: 684, 13
+  size: 73, 65
+  orig: 73, 65
+  offset: 0, 0
+  index: -1
+rear_arm_2
+  rotate: true
+  xy: 783, 43
+  size: 30, 25
+  orig: 30, 25
+  offset: 0, 0
+  index: -1
+rear_arm_3
+  rotate: false
+  xy: 748, 93
+  size: 33, 48
+  orig: 33, 48
+  offset: 0, 0
+  index: -1
+rear_ear2
+  rotate: false
+  xy: 401, 57
+  size: 103, 111
+  orig: 103, 111
+  offset: 0, 0
+  index: -1
+rear_leg_1
+  rotate: false
+  xy: 424, 8
+  size: 51, 15
+  orig: 51, 15
+  offset: 0, 0
+  index: -1
+rear_leg_2
+  rotate: true
+  xy: 162, 14
+  size: 24, 93
+  orig: 24, 93
+  offset: 0, 0
+  index: -1
+rear_leg_22
+  rotate: false
+  xy: 2, 2
+  size: 49, 13
+  orig: 49, 13
+  offset: 0, 0
+  index: -1
+ring
+  rotate: true
+  xy: 619, 11
+  size: 60, 57
+  orig: 60, 57
+  offset: 0, 0
+  index: -1
+senak1
+  rotate: true
+  xy: 751, 6
+  size: 35, 40
+  orig: 35, 40
+  offset: 0, 0
+  index: -1
+senak2
+  rotate: true
+  xy: 751, 6
+  size: 35, 40
+  orig: 35, 40
+  offset: 0, 0
+  index: -1
+white_1
+  rotate: false
+  xy: 387, 2
+  size: 35, 53
+  orig: 35, 53
+  offset: 0, 0
+  index: -1
+white_2
+  rotate: false
+  xy: 387, 2
+  size: 35, 53
+  orig: 35, 53
+  offset: 0, 0
+  index: -1

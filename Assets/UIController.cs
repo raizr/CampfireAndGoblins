@@ -21,7 +21,6 @@ public class UIController : MonoBehaviour
 		clickerManager.OnBossWin.AddListener(OnBossWin);
 		bossButton.onClick.AddListener(BossButtonClick);
 		clickerManager.OnTick.AddListener(OnTick);
-		clickerManager.OnComboClick.AddListener(OnComboClick);
 		progressBar.minValue = 0;
 		bossProgressBar.minValue = 0;
 		OnTick();
